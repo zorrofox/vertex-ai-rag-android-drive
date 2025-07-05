@@ -23,7 +23,7 @@
 本项目遵循安全的客户端-服务器架构：
 
 1.  **安卓应用 (客户端)**: 负责用户界面、处理 Google 登录 (OAuth 2.0) 以获取用户凭证，并与后端进行通信。
-2.  **后端 (Google Cloud Functions)**: 一组无服务器函数，负责处理所有核心逻：
+2.  **后端 (Google Cloud Functions)**: 一组无服务器函数，负责处理所有核心逻辑：
     *   `exchange_auth_token`: 安全地将来自应用的一次性授权码交换为可长期使用的访问令牌。
     *   `file_processor`: 从 Google Drive 下载指定文件，智能地解析其内容 (支持 `.txt`, `.docx`, 和 `.pdf` 格式)，将其分割成文本块，通过 Vertex AI API 生成向量嵌入，并将其存入 Vertex AI 向量搜索索引中。
     *   `query_handler`: 接收用户的查询，为其生成嵌入，在向量搜索索引中查找最相关的文档块，获取这些块的原始文本内容，并将结果返回给应用。
@@ -48,7 +48,7 @@
 1.  前往 [Google Cloud Console](https://console.cloud.google.com/)。
 2.  导航至 **API 与服务 > OAuth 同意屏幕**。
 3.  为用户类型选择 **外部**，然后点击 **创建**。
-4.  填写所需的应用信息（应用名称用户支持电子邮��、开发者联系信息等）。
+4.  填写所需的应用信息（应用名称、用户支持电��邮箱、开发者联系信息等）。
 5.  在 **范围** 页面，点击 **添加或移除范围**。找到并添加 Google Drive API 的范围 (`.../auth/drive.readonly`)。
 6.  在 **测试用户** 页面，点击 **+ ADD USERS** 并添加您将用于测试应用的 Google 帐号。这对于在开发过程中绕过“未验证的应用”提示至关重要。
 
@@ -71,7 +71,7 @@
 
 #### b) Web 应用客户端 ID
 
-1.  再次导航至 **API 与务 > 凭据**。
+1.  再次导航至 **API 与服务 > 凭据**。
 2.  点击 **+ 创建凭据** 并再次选择 **OAuth 客户端 ID**。
 3.  从应用类型下拉菜单中选择 **Web 应用**。
 4.  为其命名 (例如, "Gemini RAG Backend")。
@@ -92,7 +92,7 @@
 1.  **安卓应用密钥 (`local.properties`)**
     *   **位置**: `/usr/local/google/home/greghuang/mywork/lenovo-pad-rag/local.properties`
     *   **目的**: 存储 Android SDK 路径和 **Web 应用客户端 ID**。
-    *   **操作**: 确保文件包含以下内容，并将占位符换为您的实际值：
+    *   **操作**: 确保文件包含以下内容，并将占位符替换为您的实���值：
         ```properties
         # Android SDK 路径
         sdk.dir=/path/to/your/android/sdk
