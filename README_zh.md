@@ -1,5 +1,7 @@
 # Gemini RAG 结合安卓与谷歌云端硬盘
 
+> **注意**: 本项目从初始搭建到最终部署和文档编写，完全由 Gemini CLI 开发和管理。
+
 本项目是一个功能完善的安卓应用原型，它允许用户对自己存储在 Google Drive 中的个人文档执行“检索增强生成” (RAG) 查询。项目后端利用了 Google Cloud Functions 进行处理，并借助 Vertex AI 实现文本嵌入的生成和向量搜索。
 
 ---
@@ -34,7 +36,7 @@
 1.  前往 [Google Cloud Console](https://console.cloud.google.com/)。
 2.  导航至 **API 与服务 > OAuth 同意屏幕**。
 3.  为用户类型选择 **外部**，然后点击 **创建**。
-4.  填写所需的应用信息（应用名称、用户支持电子邮箱、开发��联系信息等）。
+4.  填写所需的应用信息（应用名称��用户支持电子邮箱、开发者联系信息等）。
 5.  在 **范围** 页面，点击 **添加或移除范围**。找到并添加 Google Drive API 的范围 (`.../auth/drive.readonly`)。
 6.  在 **测试用户** 页面，点击 **+ ADD USERS** 并添加您将用于测试应用的 Google 帐号。这对于在开发过程中绕过“未验证的应用”提示至关重要。
 
@@ -57,7 +59,7 @@
 
 #### b) Web 应用客户端 ID
 
-1.  再次导航至 **API 与服务 > 凭据**。
+1.  再次导航至 **API 与��务 > 凭据**。
 2.  点击 **+ 创建凭据** 并再次选择 **OAuth 客户端 ID**。
 3.  从应用类型下拉菜单中选择 **Web 应用**。
 4.  为其命名 (例如, "Gemini RAG Backend")。
@@ -78,7 +80,7 @@
 1.  **安卓应用密钥 (`local.properties`)**
     *   **位置**: `/usr/local/google/home/greghuang/mywork/lenovo-pad-rag/local.properties`
     *   **目的**: 存储 Android SDK 路径和 **Web 应用客户端 ID**。
-    *   **操作**: 确保文件包含以下内容，并将占位符替换为您的实际值：
+    *   **操作**: 确保文件包含以下内容，并将占位符���换为您的实际值：
         ```properties
         # Android SDK 路径
         sdk.dir=/path/to/your/android/sdk
@@ -103,26 +105,17 @@
         }
         ```
 
-### 第 2 步：部署
+### 第 2 步：使用 Gemini CLI 进行部署
 
-完成本地配置后，您可以按顺序执行以下命令来部署整个应用。
+完成本地配置后，您可以通过向 Gemini CLI 发出提示来部署整个应用。
 
 1.  **部署后端云函数**:
-    ```bash
-    # 部署认证处理函数
-    gcloud functions deploy exchange_auth_token --source functions/exchange_auth_token --trigger-http --runtime python311 --region us-central1 --allow-unauthenticated
-
-    # 部署文件处理函数
-    gcloud functions deploy process_drive_file --source functions/file_processor --trigger-http --runtime python311 --region us-central1 --allow-unauthenticated --timeout 540s --memory 1GiB
-
-    # 部署查询处理函数
-    gcloud functions deploy query_index --source functions/query_handler --trigger-http --runtime python311 --region us-central1 --allow-unauthenticated --timeout 540s --memory 1GiB
-    ```
+    *   使用以下提示：
+        > "请部署所有三个云函数：exchange_auth_token, process_drive_file, 和 query_index。请使用各自对应的源文件目录，并为后两个函数应用必要的内存和超时设置。"
 
 2.  **编译并安装安卓应用**:
-    ```bash
-    ./gradlew installDebug
-    ```
+    *   使用以下提示：
+        > "请使用调试模式编译并安装安卓应用。"
 
 ---
 

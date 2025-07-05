@@ -1,5 +1,7 @@
 # Gemini RAG with Google Drive on Android
 
+> **Note**: This entire project, from initial scaffolding to final deployment and documentation, was developed and managed by the Gemini CLI.
+
 This project is a fully functional prototype of an Android application that allows users to perform Retrieval-Augmented Generation (RAG) queries on their personal documents stored in Google Drive. It leverages Google Cloud Functions for backend processing and Vertex AI for embedding generation and vector search.
 
 ---
@@ -103,26 +105,17 @@ You only need to edit two files to set up your environment.
         }
         ```
 
-### Step 2: Deployment
+### Step 2: Deployment with Gemini CLI
 
-Once the local configuration is complete, you can deploy the entire stack by running the following commands in order.
+Once the local configuration is complete, you can deploy the entire stack by issuing prompts to the Gemini CLI.
 
 1.  **Deploy Backend Functions**:
-    ```bash
-    # Deploy the authentication handler
-    gcloud functions deploy exchange_auth_token --source functions/exchange_auth_token --trigger-http --runtime python311 --region us-central1 --allow-unauthenticated
-
-    # Deploy the file processor
-    gcloud functions deploy process_drive_file --source functions/file_processor --trigger-http --runtime python311 --region us-central1 --allow-unauthenticated --timeout 540s --memory 1GiB
-
-    # Deploy the query handler
-    gcloud functions deploy query_index --source functions/query_handler --trigger-http --runtime python311 --region us-central1 --allow-unauthenticated --timeout 540s --memory 1GiB
-    ```
+    *   Use the following prompt:
+        > "Deploy all three cloud functions: exchange_auth_token, process_drive_file, and query_index. Use the appropriate source directories and apply the necessary memory and timeout settings for the latter two."
 
 2.  **Compile and Install Android App**:
-    ```bash
-    ./gradlew installDebug
-    ```
+    *   Use the following prompt:
+        > "Compile and install the Android application using the debug profile."
 
 ---
 
