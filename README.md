@@ -6,6 +6,18 @@ This project is a fully functional prototype of an Android application that allo
 
 ---
 
+## From Prototype to Production: Important Next Steps
+
+This repository contains a functional technical prototype. To evolve this into a production-ready application for public release, you must address several critical security, legal, and architectural requirements.
+
+1.  **Google OAuth App Verification**: You must submit your app for Google's official OAuth verification. This involves providing a privacy policy, terms of service, and a detailed justification for every permission requested. Without verification, users will see an "unverified app" warning, severely impacting user trust.
+
+2.  **Production-Grade Secret Management**: For a live application, you should not rely on local configuration files. The best practice is to use a dedicated service like **Google Secret Manager** to store your `CLIENT_SECRET` and other sensitive keys. Your Cloud Functions should be granted IAM permissions to access these secrets at runtime.
+
+3.  **Asynchronous Architecture**: The current synchronous design has a file size limit of ~7MB and can lead to long wait times. A production app must use an asynchronous architecture. This typically involves using **Cloud Pub/Sub** to queue file processing jobs and **Firebase Cloud Messaging (FCM)** to notify the user when processing is complete.
+
+---
+
 ## Architecture
 
 The project follows a secure client-server architecture:
