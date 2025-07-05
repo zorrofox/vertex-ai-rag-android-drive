@@ -48,7 +48,7 @@
 1.  前往 [Google Cloud Console](https://console.cloud.google.com/)。
 2.  导航至 **API 与服务 > OAuth 同意屏幕**。
 3.  为用户类型选择 **外部**，然后点击 **创建**。
-4.  填写所需的应用信息（应用名称、用户支持电��邮箱、开发者联系信息等）。
+4.  填写所需的应用信息（应用名称、用户支持电子邮箱、开发者联系信息等）。
 5.  在 **范围** 页面，点击 **添加或移除范围**。找到并添加 Google Drive API 的范围 (`.../auth/drive.readonly`)。
 6.  在 **测试用户** 页面，点击 **+ ADD USERS** 并添加您将用于测试应用的 Google 帐号。这对于在开发过程中绕过“未验证的应用”提示至关重要。
 
@@ -92,7 +92,7 @@
 1.  **安卓应用密钥 (`local.properties`)**
     *   **位置**: `/usr/local/google/home/greghuang/mywork/lenovo-pad-rag/local.properties`
     *   **目的**: 存储 Android SDK 路径和 **Web 应用客户端 ID**。
-    *   **操作**: 确保文件包含以下内容，并将占位符替换为您的实���值：
+    *   **操作**: 确保文件包含以下内容，并将占位符替换为您的实际值：
         ```properties
         # Android SDK 路径
         sdk.dir=/path/to/your/android/sdk
