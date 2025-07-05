@@ -105,9 +105,11 @@ You only need to edit two files to set up your environment.
         }
         ```
 
-### Step 2: Deployment with Gemini CLI
+### Step 2: Deployment
 
-Once the local configuration is complete, you can deploy the entire stack by issuing prompts to the Gemini CLI.
+Once the local configuration is complete, you can deploy the entire stack using either the Gemini CLI or manual commands.
+
+#### Option A: Deployment with Gemini CLI
 
 1.  **Deploy Backend Functions**:
     *   Use the following prompt:
@@ -116,6 +118,25 @@ Once the local configuration is complete, you can deploy the entire stack by iss
 2.  **Compile and Install Android App**:
     *   Use the following prompt:
         > "Compile and install the Android application using the debug profile."
+
+#### Option B: Manual Deployment
+
+1.  **Deploy Backend Functions**:
+    ```bash
+    # Deploy the authentication handler
+    gcloud functions deploy exchange_auth_token --source functions/exchange_auth_token --trigger-http --runtime python311 --region us-central1 --allow-unauthenticated
+
+    # Deploy the file processor
+    gcloud functions deploy process_drive_file --source functions/file_processor --trigger-http --runtime python311 --region us-central1 --allow-unauthenticated --timeout 540s --memory 1GiB
+
+    # Deploy the query handler
+    gcloud functions deploy query_index --source functions/query_handler --trigger-http --runtime python311 --region us-central1 --allow-unauthenticated --timeout 540s --memory 1GiB
+    ```
+
+2.  **Compile and Install Android App**:
+    ```bash
+    ./gradlew installDebug
+    ```
 
 ---
 

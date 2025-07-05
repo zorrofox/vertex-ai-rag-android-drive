@@ -105,9 +105,11 @@
         }
         ```
 
-### 第 2 步：使用 Gemini CLI 进行部署
+### 第 2 步：部署
 
-完成本地配置后，您可以通过向 Gemini CLI 发出提示来部署整个应用。
+完成本地配置后，您可以使用 Gemini CLI 或手动执行命令来部署整个应用。
+
+#### 方式 A: 使用 Gemini CLI 进行部署
 
 1.  **部署后端云函数**:
     *   使用以下提示：
@@ -116,6 +118,25 @@
 2.  **编译并安装安卓应用**:
     *   使用以下提示：
         > "请使用调试模式编译并安装安卓应用。"
+
+#### 方式 B: 手动部署
+
+1.  **部署后端云函数**:
+    ```bash
+    # 部署认证处理函数
+    gcloud functions deploy exchange_auth_token --source functions/exchange_auth_token --trigger-http --runtime python311 --region us-central1 --allow-unauthenticated
+
+    # 部署文件处理函数
+    gcloud functions deploy process_drive_file --source functions/file_processor --trigger-http --runtime python311 --region us-central1 --allow-unauthenticated --timeout 540s --memory 1GiB
+
+    # 部署查询处理函数
+    gcloud functions deploy query_index --source functions/query_handler --trigger-http --runtime python311 --region us-central1 --allow-unauthenticated --timeout 540s --memory 1GiB
+    ```
+
+2.  **编译并安装安卓应用**:
+    ```bash
+    ./gradlew installDebug
+    ```
 
 ---
 
