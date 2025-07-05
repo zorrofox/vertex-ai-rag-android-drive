@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">GeminiDriveRAG</string>
+    <string name="server_client_id"></string>
+</resources>

@@ -1,0 +1,5 @@
+functions-framework==3.*
+# Used for the OAuth 2.0 flow
+google-auth-oauthlib==1.2.0
+# Used to interact with Google APIs like Drive
+google-api-python-client==2.125.0

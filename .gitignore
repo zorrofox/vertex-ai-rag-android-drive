@@ -1,0 +1,28 @@
+# Android
+*.apk
+*.ap_
+*.aab
+*.dex
+/build/
+/app/build/
+/captures/
+.DS_Store
+.gradle
+.idea
+*.iml
+*.keystore
+*.jks
+local.properties
+/app/src/main/res/raw/
+
+# Logs
+*.log
+logcat.txt
+
+# Secrets
+secrets.properties
+config.json
+
+# Other
+*.swp
+*~

@@ -1,0 +1,7 @@
+functions-framework
+google-cloud-aiplatform
+vertexai
+google-api-python-client
+google-auth-oauthlib
+python-docx
+PyMuPDF
